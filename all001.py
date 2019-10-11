@@ -1,4 +1,4 @@
-import smbus
+import smbus #引入库
 import math
 import time
 import numpy as np
@@ -6,38 +6,38 @@ import cv2
 import datetime
 
 
-power_mgmt_1 = 0x6b
+power_mgmt_1 = 0x6b#定义什么地址？
 power_mgmt_2 = 0x6c
 
-newfile=r'/home/pi/trye/imu1.txt'
+newfile=r'/home/pi/trye/imu1.txt' #存在记事本里？是不是存到一个还是两个？
 newfile=r'/home/pi/trye/temp1.txt'
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)    #啥意思？ 为什么不放在函数里
 
 fourcc = cv2.VideoWriter_fourcc(*'XVID') 
 out = cv2.VideoWriter('output.avi',fourcc,20.0,(640,480))
 
 
-def reat_byte(adr):
+def reat_byte(adr):#什么函数
     return bus.read_byte_data(i2cAddress1,adr)
 
-def read_word(adr):
+def read_word(adr):#什么函数？
     high = bus.read_byte_data(i2cAddress1,adr)
     low = bus.read_byte_data(i2cAddress1,adr)
     val = (high << 8) + low
     return val
 
-def read_word_2c(adr):
+def read_word_2c(adr):#什么函数？
     val = read_word(adr)
     if(val >= 0x8000):
         return-((65535 - val)+1)
     else:
         return val
     
-def dist(a,b):
+def dist(a,b):#什么函数
     return math.sqrt((a*a)+(b*b))
 
-def get_y_rotation(x,y,z):
+def get_y_rotation(x,y,z):#下面的x，y颠倒了？
     radians = math.atan2(x,dist(y,z))
     return -math.degrees(radians)
 
@@ -101,7 +101,7 @@ while True:
         t.write(str(data[i])+'\n')
     t.close()
     
-    ret, frame = cap.read()
+    ret, frame = cap.read()#啥意思？？？？
     if ret == 1:
         frame = cv2.flip(frame,0)
         out.write(frame)
