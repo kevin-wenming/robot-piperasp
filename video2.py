@@ -6,7 +6,8 @@ cap = cv2.VideoCapture(0)
 fourcc = cv2.VideoWriter_fourcc(*'XVID') 
 out = cv2.VideoWriter('output.avi',fourcc,20.0,(640,480))
 
-while(cap.isOpened()):
+def getvideo():
+  while(cap.isOpened()):
     ret, frame = cap.read()
     if ret == 1:
         frame = cv2.flip(frame,0)
@@ -18,6 +19,6 @@ while(cap.isOpened()):
     else:
         break
 
-cap.release()
-out.release()
-cv2.destroyAllWindows()
+  cap.release()
+  out.release()
+  cv2.destroyAllWindows()
